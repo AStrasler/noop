@@ -164,4 +164,20 @@ dependencies {
     // --- Compose tooling (debug-only) ---
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // --- Security: force kotlin-stdlib and related artifacts to >= 2.1.0 (AIKIDO-2026-550292) ---
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib") {
+            version { require("2.1.0") }
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-common") {
+            version { require("2.1.0") }
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7") {
+            version { require("2.1.0") }
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
+            version { require("2.1.0") }
+        }
+    }
 }
