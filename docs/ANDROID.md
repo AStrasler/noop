@@ -106,10 +106,10 @@ bump forces matching KSP and Compose-compiler bumps:
 | Component | Version | Notes |
 | --- | --- | --- |
 | Android Gradle Plugin | `8.5.2` | `com.android.application` |
-| Kotlin | `1.9.24` | `org.jetbrains.kotlin.android` |
-| KSP | `1.9.24-1.0.20` | `<kotlinVersion>-<kspVersion>`, must track Kotlin exactly |
+| Kotlin | `2.1.0` | `org.jetbrains.kotlin.android` |
+| KSP | `2.1.0-1.0.29` | `<kotlinVersion>-<kspVersion>`, must track Kotlin exactly |
 | Compose BOM | `2024.06.00` | pins all Compose artifacts in lockstep |
-| Compose compiler extension | `1.5.14` | matched to Kotlin 1.9.24 |
+| Compose Compiler Gradle plugin | `2.1.0` | `org.jetbrains.kotlin.plugin.compose`, matched to Kotlin |
 | Room | `2.6.1` | `room-runtime`, `room-ktx`, `room-compiler` (via KSP) |
 | `compileSdk` / `targetSdk` | `34` | |
 | `minSdk` | `26` | Android 8.0 — the floor for the current BLE permission split |
@@ -173,7 +173,7 @@ Be honest about the state of the port before building on it.
 
 | Tool | Version | Notes |
 | --- | --- | --- |
-| JDK | **17** | AGP 8.5 / Kotlin 1.9 target JVM 17 |
+| JDK | **17** | AGP 8.5 / Kotlin 2.1 target JVM 17 |
 | Android SDK | API **34** platform + build-tools; `minSdk` 26 | install via Android Studio SDK Manager or `sdkmanager` |
 | Android Studio | current stable (Koala / Ladybug or newer) | optional but recommended; provides the SDK and emulator |
 | Gradle | provided by the wrapper (target ~8.7) | do not rely on a global Gradle once the wrapper is committed |

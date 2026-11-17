@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.devtools.ksp")
 }
 
@@ -103,12 +104,6 @@ android {
         buildConfig = true
     }
 
-    composeOptions {
-        // Compose Compiler extension matched to Kotlin 1.9.24 (see the official
-        // Compose-to-Kotlin compatibility map). Bumping Kotlin requires bumping this.
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -165,19 +160,14 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // --- Security: force kotlin-stdlib and related artifacts to >= 2.1.0 (AIKIDO-2026-550292) ---
+    // --- Security: keep Kotlin standard-library artifacts on the fixed version floor ---
+    val kotlinStdlibSecurityFloor = "2.1.0"
+    val kotlinStdlibModules = listOf("kotlin-stdlib", "kotlin-stdlib-common", "kotlin-stdlib-jdk7", "kotlin-stdlib-jdk8")
     constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib") {
-            version { require("2.1.0") }
-        }
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-common") {
-            version { require("2.1.0") }
-        }
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7") {
-            version { require("2.1.0") }
-        }
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
-            version { require("2.1.0") }
+        kotlinStdlibModules.forEach { module ->
+            implementation("org.jetbrains.kotlin:$module") {
+                version { require(kotlinStdlibSecurityFloor) }
+            }
         }
     }
 }
